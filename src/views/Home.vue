@@ -1,18 +1,52 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="toggleAddCard">Add new</button>
+    <div class="container">
+    <Card v-for="card in cards" :key="card.id" :card="card" @reload-data="fetchData"/>
+    </div>
   </div>
+  <AddCard v-if="addNewCard" @reload-data="fetchData"/>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import Card from '@/components/Card.vue';
+import AddCard from '@/components/AddCard.vue';
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      cards: [],
+      addNewCard: false,
+    };
   },
+  components: {
+    Card,
+    AddCard,
+  },
+  methods: {
+    toggleAddCard() {
+      this.addNewCard = !this.addNewCard;
+    },
+    async fetchData() {
+      console.log('emited');
+      const data = await fetch('http://test.boncard.pl/rekrutacja/api/read.php');
+      const res = await data.json();
+      this.cards = res.body;
+      this.addNewCard = false;
+    },
+  },
+  async mounted() {
+    await this.fetchData();
+  },
+
 };
 </script>
+<style scoped>
+.container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+</style>
