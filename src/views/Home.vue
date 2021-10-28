@@ -31,7 +31,7 @@ export default {
     },
     async fetchData() {
       console.log('emited');
-      const data = await fetch('http://test.boncard.pl/rekrutacja/api/read.php');
+      const data = await fetch('https://test.boncard.pl/rekrutacja/api/read.php');
       const res = await data.json();
       this.cards = res.body;
       this.addNewCard = false;

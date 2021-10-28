@@ -19,7 +19,7 @@ export default {
       const ID = this.$route.params.id;
       console.log(ID);
       try {
-        const data = await fetch(`http://test.boncard.pl/rekrutacja/api/single_read.php/?id=${ID}`);
+        const data = await fetch(`https://test.boncard.pl/rekrutacja/api/single_read.php/?id=${ID}`);
         const res = await data.json();
         this.card = res;
       } catch (e) {

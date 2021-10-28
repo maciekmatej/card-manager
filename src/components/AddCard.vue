@@ -81,7 +81,7 @@ export default {
   methods: {
     async register(data) {
       try {
-        await fetch('http://test.boncard.pl/rekrutacja/api/create.php', {
+        await fetch('https://test.boncard.pl/rekrutacja/api/create.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
